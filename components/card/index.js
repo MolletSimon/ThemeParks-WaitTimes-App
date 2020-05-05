@@ -1,30 +1,45 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import WaitTime from '../waitTimes';
+import * as Font from 'expo-font';
 
 const Card = ({rideName, waitTime}) => {
-    if(parseInt(waitTime) < 15) {
-        return(
+
+    const [isFontLoaded, setIsFontLoaded] = useState(false);
+
+    const componentDidMount = async () => {
+        await Font.loadAsync({
+            'Acme': require('../../assets/fonts/Cabin-Medium.ttf')
+        });
+        setIsFontLoaded(true);
+    }
+
+    useEffect(() => {
+        componentDidMount();
+    })
+
+    if (!isFontLoaded) {
+        return <Text>Chargement...</Text>
+    }
+
+    return (
+        parseInt(waitTime) < 15 ? (
             <View style={[style.card, style.green]}>
                 <WaitTime waitTime={waitTime}/>
                 <Text style={style.ride}>{rideName}</Text>
             </View>
-        )
-    } else if (parseInt(waitTime) < 30) {
-        return(
+        ) : parseInt(waitTime) < 30 ? (
             <View style={[style.card, style.yellow]}>
                 <WaitTime waitTime={waitTime}/>
                 <Text style={style.ride}>{rideName}</Text>
             </View>
-        )
-    } else {
-        return(
+        ) : (
             <View style={[style.card, style.red]}>
                 <WaitTime waitTime={waitTime}/>
                 <Text style={style.ride}>{rideName}</Text>
             </View>
         )
-    }
+    )
 
 };
 
@@ -42,16 +57,19 @@ const style = StyleSheet.create({
         borderColor: 'lightgray',
         padding: 15,
         borderRadius: 30,
-        width: '90%',
         flexDirection: 'row',
-        margin: 5,
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20,
         alignItems: 'center'
     },
     ride: {
         marginLeft: 20,
-        fontSize: 20,
+        marginRight: 70,
+        fontSize: 25,
         fontStyle: 'italic',
-        color: 'white'
+        color: 'white',
+        fontFamily: 'Acme'
     },
     green: {
         backgroundColor: 'rgba(41,219,120,0.47)'

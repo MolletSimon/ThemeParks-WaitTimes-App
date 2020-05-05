@@ -15,6 +15,9 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7B0C5784998A29E517983E0C /* libPods-ThemeParks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2502ACF51380E8237829647D /* libPods-ThemeParks.a */; };
+		CA965CEA3BD543078C9EFDF5 /* Acme-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8EBE34F41E44723B4F6E608 /* Acme-Regular.ttf */; };
+		A22603BACB2640CBB5565638 /* Acme.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0E7B9BD37B4544C1A0C36856 /* Acme.ttf */; };
+		B827B1743EA44232A12AEF0C /* Neucha.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0252EB3A301E45CAB25330CA /* Neucha.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		E40B1F720DE0D29BF6B90074 /* Pods-ThemeParks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThemeParks.release.xcconfig"; path = "Target Support Files/Pods-ThemeParks/Pods-ThemeParks.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		E8EBE34F41E44723B4F6E608 /* Acme-Regular.ttf */ = {isa = PBXFileReference; name = "Acme-Regular.ttf"; path = "../assets/fonts/Acme-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0E7B9BD37B4544C1A0C36856 /* Acme.ttf */ = {isa = PBXFileReference; name = "Acme.ttf"; path = "../assets/fonts/Acme.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0252EB3A301E45CAB25330CA /* Neucha.ttf */ = {isa = PBXFileReference; name = "Neucha.ttf"; path = "../assets/fonts/Neucha.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				6C68EC841F3FBF9CD21359E0 /* Pods */,
+				4DA1DC19935048CB81ACF608 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -114,6 +121,17 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		4DA1DC19935048CB81ACF608 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				E8EBE34F41E44723B4F6E608 /* Acme-Regular.ttf */,
+				0E7B9BD37B4544C1A0C36856 /* Acme.ttf */,
+				0252EB3A301E45CAB25330CA /* Neucha.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -144,7 +162,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "ThemeParks" */;
@@ -176,6 +194,9 @@
 				0731D3BE24204D9B009CAE85 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				CA965CEA3BD543078C9EFDF5 /* Acme-Regular.ttf in Resources */,
+				A22603BACB2640CBB5565638 /* Acme.ttf in Resources */,
+				B827B1743EA44232A12AEF0C /* Neucha.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

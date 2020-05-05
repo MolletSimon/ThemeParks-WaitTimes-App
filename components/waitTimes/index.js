@@ -1,7 +1,26 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import * as Font from "expo-font";
 
 const WaitTime = ({waitTime}) => {
+
+    const [isFontLoaded, setIsFontLoaded] = useState(false);
+
+    const componentDidMount =async () => {
+        await Font.loadAsync({
+            'Acme': require('../../assets/fonts/Cabin-Medium.ttf')
+        });
+        setIsFontLoaded(true);
+    }
+
+    useEffect(() => {
+        componentDidMount();
+    })
+
+    if (!isFontLoaded) {
+        return <Text>Chargement..</Text>
+    }
+
     return(
         <View style={style.waitTime}>
             <Text style={style.text}>{waitTime}</Text>
@@ -22,8 +41,8 @@ const style = StyleSheet.create({
     },
     text: {
         fontSize: 30,
-        fontWeight: 'bold',
-        color: 'white'
+        color: 'white',
+        fontFamily: 'Acme'
     }
 })
 
