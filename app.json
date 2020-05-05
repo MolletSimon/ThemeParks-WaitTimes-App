@@ -1,0 +1,17 @@
+{
+  "name": "Theme-Parks",
+  "displayName": "Theme-Parks",
+  "expo": {
+    "name": "Theme-Parks",
+    "slug": "Theme-Parks",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
