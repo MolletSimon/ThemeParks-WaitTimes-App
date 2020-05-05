@@ -1,28 +1,42 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Button } from 'react-native-elements';
 import * as Font from "expo-font";
 import {Icon} from 'react-native-elements';
 
-const Footer = ({actualTab}) => {
-    return(
-        actualTab === "parc" ? (
-            <View>
-                <Text style={style.highlight}>Parc</Text>
-                <Text>Studio</Text>
-            </View>
-        ) : (
-            <View>
-                <Text>Parc</Text>
-                <Text style={style.highlight}>Studio</Text>
-            </View>
-        )
+const Footer = ({setPage, page}) => {
 
+    const handleClickPark = () => {
+         setPage("parc");
+    };
+
+    const handleClickStudios = () => {
+        setPage("studios")
+    }
+    return(
+        <View style={styles.buttons}>
+            <TouchableOpacity style={styles.button} onPress={handleClickPark}>
+                <Text>Park</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleClickStudios}>
+                <Text>Studios</Text>
+            </TouchableOpacity>
+        </View>
     )
 };
 
-const style = StyleSheet.create({
-    highlight: {
-        color: 'white'
+const styles = StyleSheet.create({
+    buttons: {
+        flexDirection: 'row',
+        backgroundColor: 'rgba(255,255,255,0.3)',
+        marginBottom: -40,
+        height: 70,
+        justifyContent: 'space-evenly'
+    },
+    button: {
+        width: '50%',
+        marginTop: 20,
+        alignItems: 'center',
     }
 })
 
