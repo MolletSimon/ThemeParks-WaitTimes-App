@@ -25,6 +25,18 @@ const Park = ({page, setPage}) => {
             name: "Buzz Lightyear",
             waitTime: 25
         },
+        {
+            name: "Star Tours",
+            waitTime: 40
+        },
+        {
+            name: "Pirates of Carribean",
+            waitTime: 5
+        },
+        {
+            name: "Autopia",
+            waitTime: 45
+        }
     ];
 
     const ridesStudios = [
@@ -51,8 +63,8 @@ const Park = ({page, setPage}) => {
             <SafeAreaView style={styles.content}>
                 {page === "parc" ? (
                     <FadeInView>
-                        <Title title="Parc Disneyland"/>
-                        <ScrollView>
+                        <ScrollView style={styles.scrollview}>
+                            <Title title="Parc Disneyland"/>
                             {ridesPark && ridesPark.length > 0 && ridesPark.map(ride => (
                                 <View key={ride.name}>
                                     <Card waitTime={ride.waitTime} rideName={ride.name}/>
@@ -63,8 +75,8 @@ const Park = ({page, setPage}) => {
                     </FadeInView>
                 ) : (
                     <FadeInViewStudios>
-                        <Title title="Studios"/>
                         <ScrollView>
+                            <Title title="Studios"/>
                             {ridesStudios && ridesStudios.length > 0 && ridesStudios.map(ride => (
                                 <View key={ride.name}>
                                     <Card waitTime={ride.waitTime} rideName={ride.name}/>
