@@ -1190,6 +1190,13 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@react-native-community/blur@^3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/blur/-/blur-3.6.0.tgz#31c9e0f2770519c9b5c4f99418f192246f0d4db8"
+  integrity sha512-GtDBhpX2pQcjl4VopOC8FktrVufrEfYRwVeMQ2WWckqKIv2BdwvlvWvj88L1WmEdBr9UNcm3rtgz+d+YXkmirA==
+  dependencies:
+    prop-types "^15.5.10"
+
 "@react-native-community/cli-debugger-ui@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-3.0.0.tgz#d01d08d1e5ddc1633d82c7d84d48fff07bd39416"
@@ -2790,6 +2797,13 @@ expo-asset@~8.1.0, expo-asset@~8.1.4:
     md5-file "^3.2.3"
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
+
+expo-blur@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/expo-blur/-/expo-blur-8.1.0.tgz#44823ddd1ed4db3864c20fa7d9b7b91b65af0d76"
+  integrity sha512-X7UUmRPV6I/f+oKJqsgKFJnKshqseK8MukwdLpIwBh7VNHiYp5gK0ynq5KlLGG6kb9zo68acjsD27DYlerARJQ==
+  dependencies:
+    prop-types "^15.6.0"
 
 expo-constants@~9.0.0:
   version "9.0.0"
@@ -5641,6 +5655,13 @@ react-native-swipe-gestures@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz#a172cb0f3e7478ccd681fd36b8bfbcdd098bde7c"
   integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
+
+react-native-swiper@^1.6.0-rc.3:
+  version "1.6.0-rc.3"
+  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.6.0-rc.3.tgz#ece82906d908c6a78a0b75fa41982ffc2cd2fb20"
+  integrity sha512-aZk6M7WsFdxlfHfS6OKb7gsaS3q7Z4Oqm8iTyJO7duE28EUK9kzfA2Cp5S6FdZkGXoWCXoUFGlzaO0lnhW/jtw==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-unimodules@~0.9.0:
   version "0.9.0"

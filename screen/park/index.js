@@ -71,7 +71,6 @@ const Park = ({page, setPage}) => {
                                 </View>
                             ))}
                         </ScrollView>
-                        <Footer page={page} setPage={setPage}/>
                     </FadeInView>
                 ) : (
                     <FadeInViewStudios>
@@ -83,7 +82,6 @@ const Park = ({page, setPage}) => {
                                 </View>
                             ))}
                         </ScrollView>
-                        <Footer page={page} setPage={setPage}/>
                     </FadeInViewStudios>
                     )}
             </SafeAreaView>
@@ -95,8 +93,7 @@ const styles = StyleSheet.create({
     rides: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(77,129,177,0.8)'
+        alignItems: 'center'
     },
     content: {
         marginTop: 100
