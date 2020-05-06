@@ -1,8 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { Button } from 'react-native-elements';
-import * as Font from "expo-font";
-import {Icon} from 'react-native-elements';
 
 const Footer = ({setPage, page}) => {
 

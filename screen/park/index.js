@@ -4,6 +4,8 @@ import Card from '../../components/card/';
 import Title from "../../components/title";
 import * as Font from "expo-font";
 import Footer from "../../components/footer";
+import FadeInView from "../../components/fadeinview";
+import FadeInViewStudios from "../../components/fadeinviewstudios";
 
 const Park = ({page, setPage}) => {
     const ridesPark = [
@@ -48,7 +50,7 @@ const Park = ({page, setPage}) => {
         <View style={styles.rides}>
             <SafeAreaView style={styles.content}>
                 {page === "parc" ? (
-                    <View>
+                    <FadeInView>
                         <Title title="Parc Disneyland"/>
                         <ScrollView>
                             {ridesPark && ridesPark.length > 0 && ridesPark.map(ride => (
@@ -58,9 +60,9 @@ const Park = ({page, setPage}) => {
                             ))}
                         </ScrollView>
                         <Footer page={page} setPage={setPage}/>
-                    </View>
+                    </FadeInView>
                 ) : (
-                    <View>
+                    <FadeInViewStudios>
                         <Title title="Studios"/>
                         <ScrollView>
                             {ridesStudios && ridesStudios.length > 0 && ridesStudios.map(ride => (
@@ -70,7 +72,7 @@ const Park = ({page, setPage}) => {
                             ))}
                         </ScrollView>
                         <Footer page={page} setPage={setPage}/>
-                    </View>
+                    </FadeInViewStudios>
                     )}
             </SafeAreaView>
         </View>
