@@ -63,11 +63,11 @@ const Park = ({page, setPage}) => {
             <SafeAreaView style={styles.content}>
                 {page === "parc" ? (
                     <FadeInView>
-                        <ScrollView style={styles.scrollview}>
+                        <ScrollView>
                             <Title title="Parc Disneyland"/>
                             {ridesPark && ridesPark.length > 0 && ridesPark.map(ride => (
                                 <View key={ride.name}>
-                                    <Card setPage={setPage} waitTime={ride.waitTime} rideName={ride.name}/>
+                                    <Card setPage={setPage} ride={ride}/>
                                 </View>
                             ))}
                         </ScrollView>
@@ -78,7 +78,7 @@ const Park = ({page, setPage}) => {
                             <Title title="Studios"/>
                             {ridesStudios && ridesStudios.length > 0 && ridesStudios.map(ride => (
                                 <View key={ride.name}>
-                                    <Card waitTime={ride.waitTime} rideName={ride.name}/>
+                                    <Card setPage={setPage} ride={ride}/>
                                 </View>
                             ))}
                         </ScrollView>

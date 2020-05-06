@@ -4,7 +4,7 @@ import WaitTime from '../waitTimes';
 import * as Font from 'expo-font';
 import LoveButton from "../love";
 
-const Card = ({rideName, waitTime, setPage}) => {
+const Card = ({ride, setPage}) => {
 
     const [isFontLoaded, setIsFontLoaded] = useState(false);
 
@@ -28,28 +28,28 @@ const Card = ({rideName, waitTime, setPage}) => {
     }
 
     return (
-        parseInt(waitTime) < 15 ? (
+        parseInt(ride.waitTime) < 15 ? (
             <TouchableOpacity onPress={handleClick}>
                 <View style={[style.card, style.green]}>
-                    <WaitTime waitTime={waitTime}/>
-                    <Text style={style.ride}>{rideName}</Text>
-                    <LoveButton/>
+                    <WaitTime waitTime={ride.waitTime}/>
+                    <Text style={style.ride}>{ride.name}</Text>
+                    <LoveButton ride={ride}/>
                 </View>
             </TouchableOpacity>
-        ) : parseInt(waitTime) < 30 ? (
+        ) : parseInt(ride.waitTime) < 30 ? (
             <TouchableOpacity onPress={handleClick}>
                 <View style={[style.card, style.yellow]}>
-                    <WaitTime waitTime={waitTime}/>
-                    <Text style={style.ride}>{rideName}</Text>
-                    <LoveButton/>
+                    <WaitTime waitTime={ride.waitTime}/>
+                    <Text style={style.ride}>{ride.name}</Text>
+                    <LoveButton ride={ride}/>
                 </View>
             </TouchableOpacity>
         ) : (
             <TouchableOpacity onPress={handleClick}>
                 <View style={[style.card, style.red]}>
-                    <WaitTime waitTime={waitTime}/>
-                    <Text style={style.ride}>{rideName}</Text>
-                    <LoveButton/>
+                    <WaitTime waitTime={ride.waitTime}/>
+                    <Text style={style.ride}>{ride.name}</Text>
+                    <LoveButton ride={ride}/>
                 </View>
             </TouchableOpacity>
         )

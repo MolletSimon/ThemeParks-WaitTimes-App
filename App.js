@@ -1,5 +1,15 @@
 import React, { useEffect, useState} from 'react';
-import {ImageBackground, SafeAreaView, ScrollView, StyleSheet, Image, Alert, Text, View} from 'react-native';
+import {
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Image,
+    Alert,
+    Text,
+    View,
+    AsyncStorage
+} from 'react-native';
 
 import Footer from "./components/footer";
 import Park from "./screen/park";
@@ -8,8 +18,9 @@ import {BlurView} from "@react-native-community/blur";
 import Swiper from 'react-native-swiper'
 
 const App = () => {
-    const [page, setPage] = useState("parc")
+    const [page, setPage] = useState("parc");
 
+    const fav = AsyncStorage.getItem("fav");
 
     return (
         <ImageBackground source={require('./assets/background2.jpg')} style={styles.imageBackground}>
@@ -35,6 +46,9 @@ const App = () => {
                     </View>
                     <View style={styles.slide}>
                         <Park page="studios" setPage={setPage}/>
+                    </View>
+                    <View style={styles.slide}>
+                        <Park page="fav" setPage={setPage}/>
                     </View>
                 </Swiper>
             )}
