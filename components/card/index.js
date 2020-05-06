@@ -9,7 +9,7 @@ const Card = ({rideName, waitTime}) => {
 
     const componentDidMount = async () => {
         await Font.loadAsync({
-            'Acme': require('../../assets/fonts/Cabin-Medium.ttf')
+            'Acme': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
         });
         setIsFontLoaded(true);
     }
@@ -55,7 +55,7 @@ const style = StyleSheet.create({
         shadowRadius: 13.16,
         elevation: 20,
         borderColor: 'lightgray',
-        padding: 15,
+        padding: 10,
         borderRadius: 30,
         flexDirection: 'row',
         marginTop: 20,
@@ -67,6 +67,7 @@ const style = StyleSheet.create({
         marginLeft: 20,
         marginRight: 70,
         fontSize: 25,
+        marginTop: 12,
         fontStyle: 'italic',
         color: 'white',
         fontFamily: 'Acme'

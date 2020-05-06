@@ -7,7 +7,7 @@ const Title = ({title}) => {
 
     const componentDidMount = async () => {
         await Font.loadAsync({
-            'Acme': require('../../assets/fonts/Cabin-Medium.ttf')
+            'Acme': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
         });
         setIsFontLoaded(true);
     }
