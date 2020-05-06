@@ -9,15 +9,23 @@ import Swiper from 'react-native-swiper'
 const App = () => {
     const [page, setPage] = useState("parc")
 
+
     return (
-        <ImageBackground source={require('./assets/background.jpg')} style={styles.imageBackground}>
+        <ImageBackground source={require('./assets/background2.jpg')} style={styles.imageBackground}>
             <BlurView
                 style={styles.absolute}
                 blurType="light"
-                blurAmount={10}
+                blurAmount={8}
                 reducedTransparencyFallbackColor="white"
             />
-            <Swiper style={styles.wrapper} loop={false} paginationStyle={styles.pagination}>
+            <Swiper style={styles.wrapper}
+                    loop={false}
+                    activeDot={
+                        <Image source={{uri: 'https://img.icons8.com/nolan/64/disney-movies-.png'}} style={styles.activeDot}/>
+                    }
+                    paginationStyle={styles.pagination}
+                    bounces={true}
+            >
                 <View style={styles.slide}>
                     <Park page="parc" setPage={setPage}/>
                 </View>
@@ -49,8 +57,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    activeDot: {
+        backgroundColor: 'white',
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        marginLeft: 3,
+        marginRight: 3,
+        marginTop: 3,
+        marginBottom: 3
+    },
     pagination: {
-
+        backgroundColor: 'rgba(78,78,78,0.72)',
+        width: '15%',
+        padding: 3,
+        borderRadius: 20,
+        marginLeft: '43%',
+        marginRight: '43%'
     }
 });
 
