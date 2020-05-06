@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import WaitTime from '../waitTimes';
 import * as Font from 'expo-font';
 import LoveButton from "../love";
 
-const Card = ({rideName, waitTime}) => {
+const Card = ({rideName, waitTime, setPage}) => {
 
     const [isFontLoaded, setIsFontLoaded] = useState(false);
 
@@ -23,25 +23,35 @@ const Card = ({rideName, waitTime}) => {
         return <Text>Chargement...</Text>
     }
 
+    const handleClick = () => {
+        setPage("ride");
+    }
+
     return (
         parseInt(waitTime) < 15 ? (
-            <View style={[style.card, style.green]}>
-                <WaitTime waitTime={waitTime}/>
-                <Text style={style.ride}>{rideName}</Text>
-                <LoveButton/>
-            </View>
+            <TouchableOpacity onPress={handleClick}>
+                <View style={[style.card, style.green]}>
+                    <WaitTime waitTime={waitTime}/>
+                    <Text style={style.ride}>{rideName}</Text>
+                    <LoveButton/>
+                </View>
+            </TouchableOpacity>
         ) : parseInt(waitTime) < 30 ? (
-            <View style={[style.card, style.yellow]}>
-                <WaitTime waitTime={waitTime}/>
-                <Text style={style.ride}>{rideName}</Text>
-                <LoveButton/>
-            </View>
+            <TouchableOpacity onPress={handleClick}>
+                <View style={[style.card, style.yellow]}>
+                    <WaitTime waitTime={waitTime}/>
+                    <Text style={style.ride}>{rideName}</Text>
+                    <LoveButton/>
+                </View>
+            </TouchableOpacity>
         ) : (
-            <View style={[style.card, style.red]}>
-                <WaitTime waitTime={waitTime}/>
-                <Text style={style.ride}>{rideName}</Text>
-                <LoveButton/>
-            </View>
+            <TouchableOpacity onPress={handleClick}>
+                <View style={[style.card, style.red]}>
+                    <WaitTime waitTime={waitTime}/>
+                    <Text style={style.ride}>{rideName}</Text>
+                    <LoveButton/>
+                </View>
+            </TouchableOpacity>
         )
     )
 

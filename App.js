@@ -3,6 +3,7 @@ import {ImageBackground, SafeAreaView, ScrollView, StyleSheet, Image, Alert, Tex
 
 import Footer from "./components/footer";
 import Park from "./screen/park";
+import Ride from "./screen/ride";
 import {BlurView} from "@react-native-community/blur";
 import Swiper from 'react-native-swiper'
 
@@ -18,22 +19,25 @@ const App = () => {
                 blurAmount={8}
                 reducedTransparencyFallbackColor="white"
             />
-            <Swiper style={styles.wrapper}
-                    loop={false}
-                    activeDot={
-                        <Image source={{uri: 'https://img.icons8.com/nolan/64/disney-movies-.png'}} style={styles.activeDot}/>
-                    }
-                    paginationStyle={styles.pagination}
-                    bounces={true}
-            >
-                <View style={styles.slide}>
-                    <Park page="parc" setPage={setPage}/>
-                </View>
-                <View style={styles.slide}>
-                    <Park page="studios" setPage={setPage}/>
-                </View>
-            </Swiper>
-
+            {page === "ride" ? (
+                <Ride setPage={setPage}/>
+            ) : (
+                <Swiper style={styles.wrapper}
+                        loop={false}
+                        activeDot={
+                            <Image source={{uri: 'https://img.icons8.com/nolan/64/disney-movies-.png'}} style={styles.activeDot}/>
+                        }
+                        paginationStyle={styles.pagination}
+                        bounces={true}
+                >
+                    <View style={styles.slide}>
+                        <Park page="parc" setPage={setPage}/>
+                    </View>
+                    <View style={styles.slide}>
+                        <Park page="studios" setPage={setPage}/>
+                    </View>
+                </Swiper>
+            )}
         </ImageBackground>
     );
 }

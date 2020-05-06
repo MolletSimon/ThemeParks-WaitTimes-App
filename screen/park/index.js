@@ -67,7 +67,7 @@ const Park = ({page, setPage}) => {
                             <Title title="Parc Disneyland"/>
                             {ridesPark && ridesPark.length > 0 && ridesPark.map(ride => (
                                 <View key={ride.name}>
-                                    <Card waitTime={ride.waitTime} rideName={ride.name}/>
+                                    <Card setPage={setPage} waitTime={ride.waitTime} rideName={ride.name}/>
                                 </View>
                             ))}
                         </ScrollView>
