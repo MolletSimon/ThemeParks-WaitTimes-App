@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import WaitTime from '../waitTimes';
 import * as Font from 'expo-font';
+import LoveButton from "../love";
 
 const Card = ({rideName, waitTime}) => {
 
@@ -27,16 +28,19 @@ const Card = ({rideName, waitTime}) => {
             <View style={[style.card, style.green]}>
                 <WaitTime waitTime={waitTime}/>
                 <Text style={style.ride}>{rideName}</Text>
+                <LoveButton/>
             </View>
         ) : parseInt(waitTime) < 30 ? (
             <View style={[style.card, style.yellow]}>
                 <WaitTime waitTime={waitTime}/>
                 <Text style={style.ride}>{rideName}</Text>
+                <LoveButton/>
             </View>
         ) : (
             <View style={[style.card, style.red]}>
                 <WaitTime waitTime={waitTime}/>
                 <Text style={style.ride}>{rideName}</Text>
+                <LoveButton/>
             </View>
         )
     )
@@ -64,9 +68,9 @@ const style = StyleSheet.create({
         alignItems: 'center'
     },
     ride: {
-        marginLeft: 20,
-        marginRight: 70,
-        fontSize: 25,
+        marginLeft: 17,
+        width: '58%',
+        fontSize: 20,
         marginTop: 12,
         fontStyle: 'italic',
         color: 'white',
