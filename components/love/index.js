@@ -4,14 +4,20 @@ import {Button, StyleSheet, Text, TouchableOpacity, View, Image, AsyncStorage} f
 import { WaitTimesSerices } from "../../services/WaitTimesService";
 import { getUniqueId } from "react-native-device-info";
 
-const LoveButton = ({ride, isLoved, setIsLoved, favRides}) => {
+const LoveButton = ({ride, isLoved, setIsLoved}) => {
 
     const handleClick = async () => {
         setIsLoved(!isLoved);
 
         //check if already favorite
-        console.log(favRides);
-        Axios.post(WaitTimesSerices.ADD_FAVRIDES, {ride: ride, user: getUniqueId()});
+        if (ride.isLoved) {
+            ride.isLoved = false;
+            console.log(`${WaitTimesSerices.DELETE_FAVRIDE}/${ride.idFav}`)
+            Axios.delete(`${WaitTimesSerices.DELETE_FAVRIDE}/${ride.idFav}`)
+        } else {
+            ride.isLoved = true;
+            Axios.post(WaitTimesSerices.ADD_FAVRIDES, {ride: ride, user: getUniqueId()});
+        }
     }
 
     return(

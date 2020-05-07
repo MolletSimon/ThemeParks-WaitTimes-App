@@ -4,7 +4,8 @@ import {
     StyleSheet,
     Image,
     View,
-    AsyncStorage
+    AsyncStorage,
+    Alert
 } from 'react-native';
 
 import Park from "./screen/park";
@@ -24,27 +25,65 @@ const App = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            await Axios.get(WaitTimesSerices.GET_WAITTIMES_PARK)
+            //get fav rides
+            await Axios.get(`${WaitTimesSerices.GET_FAVRIDES}/${getUniqueId()}`)
             .then(response => {
-                setRidesPark(response.data["waitTimes"]);
-            })
-            .catch(error => {
-                Alert.alert(
-                    "Aïe aïe aïe !",
-                    error.message
-                )
+                let favRides = [];
+                response.data["favRides"].forEach(favRide => {
+                    const ride = {...favRide.ride};
+                    ride.idFav = favRide._id;
+                    ride.isLoved = true;
+                    favRides.push(ride);
+                });
+                setFavRides(favRides);
+
+
+
+                //get data park
+                Axios.get(WaitTimesSerices.GET_WAITTIMES_PARK)
+                    .then(response => {
+                        let ridesPark = [];
+                        response.data["waitTimes"].forEach(ridePark => {
+                            const newRide = {...ridePark};
+
+                            // check if ride in favride
+                            favRides.forEach(favRide => {
+                                if (favRide.id === newRide.id) {
+                                    newRide.isLoved = true;
+                                }
+                            })
+                            ridesPark.push(newRide);
+                        });
+                        setRidesPark(ridesPark);
+                    })
+                    .catch(error => {
+                        Alert.alert(
+                            "Aïe aïe aïe !",
+                            error.message
+                        )
+                    })
             })
         };
-
         fetchData();
     }, [handleIndexChange])
 
     const handleIndexChange = async (index) => {
-        if (index === 1) {
-            if (!ridesStudios) {
-                await Axios.get(WaitTimesSerices.GET_WAITTIMES_STUDIOS)
+        if (index === 1 && favRides && !ridesStudios) {
+            await Axios.get(WaitTimesSerices.GET_WAITTIMES_STUDIOS)
                 .then(response => {
-                    setRidesStudios(response.data["waitTimes"]);
+                    let ridesStudios = [];
+                        response.data["waitTimes"].forEach(rideStudio => {
+                            const newRide = {...rideStudio};
+
+                            // check if ride in favride
+                            favRides.forEach(favRide => {
+                                if (favRide.id === newRide.id) {
+                                    newRide.isLoved = true;
+                                }
+                            })
+                            ridesStudios.push(newRide);
+                        });
+                    setRidesStudios(ridesStudios);
                 })
                 .catch(error => {
                     Alert.alert(
@@ -52,20 +91,17 @@ const App = () => {
                         error.message
                     )
                 })
-            }
         } else if (index === 2) {
-            await Axios.get(`${WaitTimesSerices.GET_FAVRIDES}/${getUniqueId()}`)
-                .then(response => {
-                    let favRides = []
-                    response.data["favRides"].forEach(favRide => {
-                        const ride = {...favRide.ride};
-                        ride.idFav = favRide._id;
-                        ride.isLoved = true;
-                        favRides.push(ride);
-                        console.log(ride);
-                    });
-                    setFavRides(favRides);
-                })
+            Axios.get(`${WaitTimesSerices.GET_FAVRIDES}/${getUniqueId()}`).then(response => {
+                let favRides = [];
+                response.data["favRides"].forEach(favRide => {
+                    const ride = {...favRide.ride};
+                    ride.idFav = favRide._id;
+                    ride.isLoved = true;
+                    favRides.push(ride);
+                });
+                setFavRides(favRides);
+            })
         }
     }
 

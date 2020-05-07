@@ -11,7 +11,7 @@ const ViewPark = ({rides, setPage, title, favRides}) => {
                 <Title title={title}/>
                 {rides && rides.length > 0 && rides.map(ride => (
                     <View key={ride.name}>
-                        <Card setPage={setPage} ride={ride} favRides={favRides}/>
+                        <Card setPage={setPage} ride={ride}/>
                     </View>
                 ))}
             </ScrollView>
