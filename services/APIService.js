@@ -1,3 +1,3 @@
 export const APIService = {
-    URL_API: 'http://localhost:3000/api/'
+    URL_API: 'https://api-themeparks-waittimes.cleverapps.io/api/'
 }
