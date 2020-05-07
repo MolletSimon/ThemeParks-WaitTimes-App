@@ -24,7 +24,6 @@ const App = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log('APPEL API')
             await Axios.get(WaitTimesSerices.GET_WAITTIMES_PARK)
             .then(response => {
                 setRidesPark(response.data["waitTimes"]);
@@ -43,7 +42,6 @@ const App = () => {
     const handleIndexChange = async (index) => {
         if (index === 1) {
             if (!ridesStudios) {
-                console.log('Appel API');
                 await Axios.get(WaitTimesSerices.GET_WAITTIMES_STUDIOS)
                 .then(response => {
                     setRidesStudios(response.data["waitTimes"]);
@@ -56,10 +54,18 @@ const App = () => {
                 })
             }
         } else if (index === 2) {
-            const uniqueId = await AsyncStorage.getItem("uniqueId");
-            if (!uniqueId) {
-                await AsyncStorage.setItem("uniqueId", getUniqueId());
-            }
+            await Axios.get(`${WaitTimesSerices.GET_FAVRIDES}/${getUniqueId()}`)
+                .then(response => {
+                    let favRides = []
+                    response.data["favRides"].forEach(favRide => {
+                        const ride = {...favRide.ride};
+                        ride.idFav = favRide._id;
+                        ride.isLoved = true;
+                        favRides.push(ride);
+                        console.log(ride);
+                    });
+                    setFavRides(favRides);
+                })
         }
     }
 
@@ -84,13 +90,13 @@ const App = () => {
                         onIndexChanged={handleIndexChange}
                 >
                     <View style={styles.slide}>
-                        <Park page="parc" setPage={setPage} rides={ridesPark}/>
+                        <Park page="parc" setPage={setPage} rides={ridesPark} favRides={favRides}/>
                     </View>
                     <View style={styles.slide}>
-                        <Park page="studios" setPage={setPage} rides={ridesStudios}/>
+                        <Park page="studios" setPage={setPage} rides={ridesStudios} favRides={favRides}/>
                     </View>
                     <View style={styles.slide}>
-                        <Park page="fav" setPage={setPage} rides={favRides}/>
+                        <Park page="fav" setPage={setPage} rides={favRides} favRides={favRides}/>
                     </View>
                 </Swiper>
             )}

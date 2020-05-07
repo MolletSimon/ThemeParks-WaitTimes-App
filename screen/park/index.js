@@ -3,7 +3,7 @@ import {ActivityIndicator, AsyncStorage, SafeAreaView, StyleSheet, View, Alert} 
 import ViewPark from "../../components/viewPark";
 
 
-const Park = ({page, setPage, rides}) => {
+const Park = ({page, setPage, rides, favRides}) => {
     
     return (
         <View style={styles.rides}>
@@ -11,19 +11,19 @@ const Park = ({page, setPage, rides}) => {
                 {page === "parc" ? (
                     rides ? (
                         <ViewPark rides={rides} setPage={setPage}
-                                  title="Parc Disneyland"/>
+                                  title="Parc Disneyland" favRides={favRides}/>
                     ) : (
                         <ActivityIndicator size="large" color="white"/>
                     )
                 ) : page === "studios" ? (
                     rides ? (
                         <ViewPark rides={rides} setPage={setPage}
-                                  title="Walt Disney Studio"/>
+                                  title="Walt Disney Studio" favRides={favRides}/>
                     ) : (
                         <ActivityIndicator size="large" color="white"/>
                     )
                 ) : (
-                    <ViewPark rides={rides} setPage={setPage} title="Vos favoris"/>
+                    <ViewPark rides={rides} setPage={setPage} title="Vos favoris" favRides={favRides}/>
                 )}
             </SafeAreaView>
         </View>
