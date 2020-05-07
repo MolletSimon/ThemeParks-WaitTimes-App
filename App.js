@@ -3,7 +3,8 @@ import {
     ImageBackground,
     StyleSheet,
     Image,
-    View
+    View,
+    AsyncStorage
 } from 'react-native';
 
 import Park from "./screen/park";
@@ -13,6 +14,7 @@ import Swiper from 'react-native-swiper';
 import Axios from "axios";
 import {WaitTimesSerices} from "./services/WaitTimesService";
 import {NetworkInfo} from 'react-native-network-info';
+import { getUniqueId } from 'react-native-device-info';
 
 const App = () => {
     const [page, setPage] = useState("parc");
@@ -54,9 +56,10 @@ const App = () => {
                 })
             }
         } else if (index === 2) {
-            NetworkInfo.getIPAddress().then(ipAddress => {
-                console.log(ipAddress);
-              });
+            const uniqueId = await AsyncStorage.getItem("uniqueId");
+            if (!uniqueId) {
+                await AsyncStorage.setItem("uniqueId", getUniqueId());
+            }
         }
     }
 
