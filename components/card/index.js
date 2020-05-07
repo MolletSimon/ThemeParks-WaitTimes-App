@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator} from 'react-native';
 import WaitTime from '../waitTimes';
 import * as Font from 'expo-font';
 import LoveButton from "../love";
@@ -17,23 +17,10 @@ const Card = ({ride, setPage, setFavRides}) => {
 
     useEffect(() => {
         componentDidMount();
-
-        // get rides loved
-        AsyncStorage.getItem("fav").then(favs => {
-            if (favs) {
-                const favRides = (JSON.parse(favs)).rides;
-                favRides.forEach(favRide => {
-                    if (favRide.name === ride.name) {
-                        // favorite
-                        setIsLoved(true);
-                    }
-                })
-            }
-        })
-    })
+    }, [])
 
     if (!isFontLoaded) {
-        return <Text>Chargement...</Text>
+        return <ActivityIndicator size="large" color="white" />
     }
 
     const handleClick = () => {
@@ -42,7 +29,7 @@ const Card = ({ride, setPage, setFavRides}) => {
 
     return (
         ride.active ? (
-            parseInt(ride.waitTime) < 15 ? (
+            parseInt(ride.waitTime) < 20 ? (
                 <TouchableOpacity onPress={handleClick}>
                     <View style={[style.card, style.green]}>
                         <WaitTime waitTime={ride.waitTime}/>
@@ -50,7 +37,7 @@ const Card = ({ride, setPage, setFavRides}) => {
                         <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
                     </View>
                 </TouchableOpacity>
-            ) : parseInt(ride.waitTime) < 30 ? (
+            ) : parseInt(ride.waitTime) < 40 ? (
                 <TouchableOpacity onPress={handleClick}>
                     <View style={[style.card, style.yellow]}>
                         <WaitTime waitTime={ride.waitTime}/>

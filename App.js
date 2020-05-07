@@ -3,27 +3,60 @@ import {
     ImageBackground,
     StyleSheet,
     Image,
-    View,
-    AsyncStorage
+    View
 } from 'react-native';
 
 import Park from "./screen/park";
 import Ride from "./screen/ride";
 import {BlurView} from "@react-native-community/blur";
-import Swiper from 'react-native-swiper'
+import Swiper from 'react-native-swiper';
+import Axios from "axios";
+import {WaitTimesSerices} from "./services/WaitTimesService";
+import {NetworkInfo} from 'react-native-network-info';
 
 const App = () => {
     const [page, setPage] = useState("parc");
+    const [ridesPark, setRidesPark] = useState(null);
+    const [ridesStudios, setRidesStudios] = useState(null);
     const [favRides, setFavRides] = useState(null);
 
-    const handleIndexChange = async(index) => {
-        if (!await AsyncStorage.getItem("fav")) {
-            setFavRides(null);
-        } else {
-            AsyncStorage.getItem("fav").then(favs => {
-                const favorites = (JSON.parse(favs)).rides
-                setFavRides(favorites);
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log('APPEL API')
+            await Axios.get(WaitTimesSerices.GET_WAITTIMES_PARK)
+            .then(response => {
+                setRidesPark(response.data["waitTimes"]);
             })
+            .catch(error => {
+                Alert.alert(
+                    "Aïe aïe aïe !",
+                    error.message
+                )
+            })
+        };
+
+        fetchData();
+    }, [handleIndexChange])
+
+    const handleIndexChange = async (index) => {
+        if (index === 1) {
+            if (!ridesStudios) {
+                console.log('Appel API');
+                await Axios.get(WaitTimesSerices.GET_WAITTIMES_STUDIOS)
+                .then(response => {
+                    setRidesStudios(response.data["waitTimes"]);
+                })
+                .catch(error => {
+                    Alert.alert(
+                        "Aïe aïe aïe !",
+                        error.message
+                    )
+                })
+            }
+        } else if (index === 2) {
+            NetworkInfo.getIPAddress().then(ipAddress => {
+                console.log(ipAddress);
+              });
         }
     }
 
@@ -48,13 +81,13 @@ const App = () => {
                         onIndexChanged={handleIndexChange}
                 >
                     <View style={styles.slide}>
-                        <Park page="parc" setPage={setPage} setFavRides={setFavRides}/>
+                        <Park page="parc" setPage={setPage} rides={ridesPark}/>
                     </View>
                     <View style={styles.slide}>
-                        <Park page="studios" setPage={setPage} setFavRides={setFavRides}/>
+                        <Park page="studios" setPage={setPage} rides={ridesStudios}/>
                     </View>
                     <View style={styles.slide}>
-                        <Park page="fav" setPage={setPage} favRides={favRides} setFavRides={setFavRides}/>
+                        <Park page="fav" setPage={setPage} rides={favRides}/>
                     </View>
                 </Swiper>
             )}

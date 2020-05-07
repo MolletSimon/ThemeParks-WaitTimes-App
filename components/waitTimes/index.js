@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import * as Font from "expo-font";
 
 const WaitTime = ({waitTime}) => {
@@ -15,10 +15,10 @@ const WaitTime = ({waitTime}) => {
 
     useEffect(() => {
         componentDidMount();
-    })
+    }, [])
 
     if (!isFontLoaded) {
-        return <Text>Chargement..</Text>
+        return <ActivityIndicator size="large" color="white"/>
     }
 
     return(
