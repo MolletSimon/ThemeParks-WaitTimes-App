@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import WaitTime from '../waitTimes';
 import * as Font from 'expo-font';
 import LoveButton from "../love";
 
-const Card = ({ride, setPage}) => {
-
+const Card = ({ride, setPage, setFavRides}) => {
+    const [isLoved, setIsLoved] = useState(false);
     const [isFontLoaded, setIsFontLoaded] = useState(false);
 
     const componentDidMount = async () => {
@@ -17,6 +17,19 @@ const Card = ({ride, setPage}) => {
 
     useEffect(() => {
         componentDidMount();
+
+        // get rides loved
+        AsyncStorage.getItem("fav").then(favs => {
+            if (favs) {
+                const favRides = (JSON.parse(favs)).rides;
+                favRides.forEach(favRide => {
+                    if (favRide.name === ride.name) {
+                        // favorite
+                        setIsLoved(true);
+                    }
+                })
+            }
+        })
     })
 
     if (!isFontLoaded) {
@@ -33,7 +46,7 @@ const Card = ({ride, setPage}) => {
                 <View style={[style.card, style.green]}>
                     <WaitTime waitTime={ride.waitTime}/>
                     <Text style={style.ride}>{ride.name}</Text>
-                    <LoveButton ride={ride}/>
+                    <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
                 </View>
             </TouchableOpacity>
         ) : parseInt(ride.waitTime) < 30 ? (
@@ -41,7 +54,7 @@ const Card = ({ride, setPage}) => {
                 <View style={[style.card, style.yellow]}>
                     <WaitTime waitTime={ride.waitTime}/>
                     <Text style={style.ride}>{ride.name}</Text>
-                    <LoveButton ride={ride}/>
+                    <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
                 </View>
             </TouchableOpacity>
         ) : (
@@ -49,7 +62,7 @@ const Card = ({ride, setPage}) => {
                 <View style={[style.card, style.red]}>
                     <WaitTime waitTime={ride.waitTime}/>
                     <Text style={style.ride}>{ride.name}</Text>
-                    <LoveButton ride={ride}/>
+                    <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
                 </View>
             </TouchableOpacity>
         )

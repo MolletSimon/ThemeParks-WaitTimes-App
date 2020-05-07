@@ -1,13 +1,8 @@
-import React, {useState} from 'react';
-import {ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import Card from '../../components/card/';
-import Title from "../../components/title";
-import * as Font from "expo-font";
-import Footer from "../../components/footer";
-import FadeInView from "../../components/fadeinview";
-import FadeInViewStudios from "../../components/fadeinviewstudios";
+import React, {useEffect, useState} from 'react';
+import {AsyncStorage, SafeAreaView, StyleSheet, View} from 'react-native';
+import ViewPark from "../../components/viewPark";
 
-const Park = ({page, setPage}) => {
+const Park = ({page, setPage, favRides, setFavRides}) => {
     const ridesPark = [
         {
             name: "Big Thunder Mountain",
@@ -38,7 +33,6 @@ const Park = ({page, setPage}) => {
             waitTime: 45
         }
     ];
-
     const ridesStudios = [
         {
             name: "Hollywood Tower Hotel",
@@ -56,34 +50,18 @@ const Park = ({page, setPage}) => {
             name: "Cars",
             waitTime: 25
         },
-    ]
+    ];
 
-    return(
+    return (
         <View style={styles.rides}>
             <SafeAreaView style={styles.content}>
                 {page === "parc" ? (
-                    <FadeInView>
-                        <ScrollView>
-                            <Title title="Parc Disneyland"/>
-                            {ridesPark && ridesPark.length > 0 && ridesPark.map(ride => (
-                                <View key={ride.name}>
-                                    <Card setPage={setPage} ride={ride}/>
-                                </View>
-                            ))}
-                        </ScrollView>
-                    </FadeInView>
+                    <ViewPark setFavRides={setFavRides} rides={ridesPark} setPage={setPage} title="Parc Disneyland"/>
+                ) : page === "studios" ? (
+                    <ViewPark setFavRides={setFavRides} rides={ridesStudios} setPage={setPage} title="Walt Disney Studio"/>
                 ) : (
-                    <FadeInViewStudios>
-                        <ScrollView>
-                            <Title title="Studios"/>
-                            {ridesStudios && ridesStudios.length > 0 && ridesStudios.map(ride => (
-                                <View key={ride.name}>
-                                    <Card setPage={setPage} ride={ride}/>
-                                </View>
-                            ))}
-                        </ScrollView>
-                    </FadeInViewStudios>
-                    )}
+                    <ViewPark setFavRides={setFavRides} rides={favRides} setPage={setPage} title="Vos favoris"/>
+                )}
             </SafeAreaView>
         </View>
     )

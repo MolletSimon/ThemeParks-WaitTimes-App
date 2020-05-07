@@ -16,11 +16,23 @@ import Park from "./screen/park";
 import Ride from "./screen/ride";
 import {BlurView} from "@react-native-community/blur";
 import Swiper from 'react-native-swiper'
+import {set} from "react-native-reanimated";
 
 const App = () => {
     const [page, setPage] = useState("parc");
+    const [favRides, setFavRides] = useState(null);
 
-    const fav = AsyncStorage.getItem("fav");
+    const handleIndexChange = async(index) => {
+        if (!await AsyncStorage.getItem("fav")) {
+            setFavRides(null);
+        } else {
+            AsyncStorage.getItem("fav").then(favs => {
+                const favorites = (JSON.parse(favs)).rides
+                setFavRides(favorites);
+
+            })
+        }
+    }
 
     return (
         <ImageBackground source={require('./assets/background2.jpg')} style={styles.imageBackground}>
@@ -40,15 +52,16 @@ const App = () => {
                         }
                         paginationStyle={styles.pagination}
                         bounces={true}
+                        onIndexChanged={handleIndexChange}
                 >
                     <View style={styles.slide}>
-                        <Park page="parc" setPage={setPage}/>
+                        <Park page="parc" setPage={setPage} setFavRides={setFavRides}/>
                     </View>
                     <View style={styles.slide}>
-                        <Park page="studios" setPage={setPage}/>
+                        <Park page="studios" setPage={setPage} setFavRides={setFavRides}/>
                     </View>
                     <View style={styles.slide}>
-                        <Park page="fav" setPage={setPage}/>
+                        <Park page="fav" setPage={setPage} favRides={favRides} setFavRides={setFavRides}/>
                     </View>
                 </Swiper>
             )}

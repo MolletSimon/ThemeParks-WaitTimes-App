@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import {Button, StyleSheet, Text, TouchableOpacity, View, Image, AsyncStorage} from 'react-native';
 
-const LoveButton = ({ride}) => {
+const LoveButton = ({ride, setFavRides, isLoved, setIsLoved}) => {
 
-    const [isLoved, setIsLoved] = useState(false);
+    let createItemPromise, newItemPromise, removeOldObjectPromise, newObjectPromise, removeOldItemPromise, clearStoragePromise;
 
     const handleClick = () => {
-        setIsLoved(!isLoved);
 
         // set fav with AsyncStorage
         AsyncStorage.getItem("fav").then(favs => {
@@ -16,7 +15,7 @@ const LoveButton = ({ride}) => {
                     rides: []
                 };
                 favorites.rides.push(ride);
-                AsyncStorage.setItem("fav", JSON.stringify(favorites)).then(() => console.log('OK'));
+                createItemPromise = AsyncStorage.setItem("fav", JSON.stringify(favorites)).then(() => 'OK');
             } else {
                 //objects favs exist, does the item in array exist ?
                 const fav = {...JSON.parse(favs)};
@@ -24,6 +23,7 @@ const LoveButton = ({ride}) => {
                 fav.rides.forEach(oldRide => {
                     if (oldRide.name === ride.name) {
                         //item in array exist, delete it
+                        setIsLoved(false);
                         exist = true;
                         const newArray = fav.rides.filter(ride => ride.name !== oldRide.name)
                         const newFav = {
@@ -32,11 +32,11 @@ const LoveButton = ({ride}) => {
                         // was it the only item in array ?
                         if (newArray.length === 0) {
                             // it was, clear all
-                            clearStorage();
+                            clearStoragePromise = AsyncStorage.removeItem("fav").then(() => 'ClearStorage')
                         } else {
                             //it wasn't, just push the new array
-                            AsyncStorage.removeItem("fav").then(() => {
-                                AsyncStorage.setItem("fav", JSON.stringify(newFav)).then(() => console.log('Element supprimés'));
+                            removeOldObjectPromise = AsyncStorage.removeItem("fav").then(() => {
+                                newObjectPromise = AsyncStorage.setItem("fav", JSON.stringify(newFav)).then(() => 'Element supprimés');
                             });
                         }
                     }
@@ -45,29 +45,35 @@ const LoveButton = ({ride}) => {
                 if (!exist) {
                     //the item in the array does not exist, add it
                     fav.rides.push(ride);
-                    AsyncStorage.removeItem("fav").then(() => {
-                        AsyncStorage.setItem("fav", JSON.stringify(fav)).then(() => console.log('OK AGAIN'));
+                    removeOldItemPromise = AsyncStorage.removeItem("fav").then(() => {
+                        newItemPromise = AsyncStorage.setItem("fav", JSON.stringify(fav)).then(() => 'OK AGAIN');
                     })
 
                 }
             }
+
+            Promise.all([clearStoragePromise, createItemPromise, newItemPromise, removeOldObjectPromise, newObjectPromise, removeOldItemPromise]).then(() => {
+                //set page
+                AsyncStorage.getItem("fav").then(favorites => {
+                    if (favorites) {
+                        const favRides = (JSON.parse(favorites)).rides;
+                        favRides.forEach(favRide => {
+                            if (favRide.name === ride.name) {
+                                // favorite
+                                setIsLoved(true);
+                            } else {
+                                setIsLoved(false);
+                            }
+                        })
+                        setFavRides(favRides);
+                    } else {
+                        setFavRides(null);
+                    }
+                })
+
+            })
         })
 
-    }
-
-    const clearStorage = () => {
-        AsyncStorage.getItem("fav").then(item => {
-            if (!item) {
-                console.log('already clear');
-            } else {
-                AsyncStorage.clear().then(() => console.log('Storage Clear'));
-            }
-        });
-
-    }
-
-    const handleTest = () => {
-        AsyncStorage.getItem("fav").then(item => console.log(JSON.parse(item)));
     }
 
     return(
