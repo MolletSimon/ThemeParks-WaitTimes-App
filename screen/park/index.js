@@ -1,64 +1,57 @@
 import React, {useEffect, useState} from 'react';
-import {AsyncStorage, SafeAreaView, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, AsyncStorage, SafeAreaView, StyleSheet, View, Alert} from 'react-native';
 import ViewPark from "../../components/viewPark";
+import Axios from "axios";
+import {WaitTimesSerices} from "../../services/WaitTimesService";
 
 const Park = ({page, setPage, favRides, setFavRides}) => {
-    const ridesPark = [
-        {
-            name: "Big Thunder Mountain",
-            waitTime: 120
-        },
-        {
-            name: "Alice's Curious Labyrinth",
-            waitTime: 5
-        },
-        {
-            name: "Hyperspace Mountain",
-            waitTime: 40
-        },
-        {
-            name: "Buzz Lightyear",
-            waitTime: 25
-        },
-        {
-            name: "Star Tours",
-            waitTime: 40
-        },
-        {
-            name: "Pirates of Carribean",
-            waitTime: 5
-        },
-        {
-            name: "Autopia",
-            waitTime: 45
-        }
-    ];
-    const ridesStudios = [
-        {
-            name: "Hollywood Tower Hotel",
-            waitTime: 40
-        },
-        {
-            name: "Armagedoon",
-            waitTime: 10
-        },
-        {
-            name: "Crush Coaster's",
-            waitTime: 130
-        },
-        {
-            name: "Cars",
-            waitTime: 25
-        },
-    ];
+    const [ridesPark, setRidesPark] = useState(null)
+    const [ridesStudios, setRidesStudios] = useState(null)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await Axios.get(WaitTimesSerices.GET_WAITTIMES_PARK)
+                .then(response => {
+                    setRidesPark(response.data["waitTimes"]);
+                })
+                .catch(error => {
+                    Alert.alert(
+                        "Aïe aïe aïe !",
+                        error.message
+                    )
+                })
+            await Axios.get(WaitTimesSerices.GET_WAITTIMES_STUDIOS)
+                .then(response => {
+                    setRidesStudios(response.data["waitTimes"]);
+                })
+                .catch(error => {
+                    Alert.alert(
+                        "Aïe aïe aïe !",
+                        error.message
+                    )
+                })
+        };
+
+        fetchData();
+    }, [])
 
     return (
         <View style={styles.rides}>
             <SafeAreaView style={styles.content}>
                 {page === "parc" ? (
-                    <ViewPark setFavRides={setFavRides} rides={ridesPark} setPage={setPage} title="Parc Disneyland"/>
+                    ridesPark ? (
+                        <ViewPark setFavRides={setFavRides} rides={ridesPark} setPage={setPage}
+                                  title="Parc Disneyland"/>
+                    ) : (
+                        <ActivityIndicator size="large" color="white"/>
+                    )
                 ) : page === "studios" ? (
-                    <ViewPark setFavRides={setFavRides} rides={ridesStudios} setPage={setPage} title="Walt Disney Studio"/>
+                    ridesStudios ? (
+                        <ViewPark setFavRides={setFavRides} rides={ridesStudios} setPage={setPage}
+                                  title="Walt Disney Studio"/>
+                    ) : (
+                        <ActivityIndicator size="large" color="white"/>
+                    )
                 ) : (
                     <ViewPark setFavRides={setFavRides} rides={favRides} setPage={setPage} title="Vos favoris"/>
                 )}

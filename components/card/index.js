@@ -41,31 +41,42 @@ const Card = ({ride, setPage, setFavRides}) => {
     }
 
     return (
-        parseInt(ride.waitTime) < 15 ? (
-            <TouchableOpacity onPress={handleClick}>
-                <View style={[style.card, style.green]}>
-                    <WaitTime waitTime={ride.waitTime}/>
-                    <Text style={style.ride}>{ride.name}</Text>
-                    <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
-                </View>
-            </TouchableOpacity>
-        ) : parseInt(ride.waitTime) < 30 ? (
-            <TouchableOpacity onPress={handleClick}>
-                <View style={[style.card, style.yellow]}>
-                    <WaitTime waitTime={ride.waitTime}/>
-                    <Text style={style.ride}>{ride.name}</Text>
-                    <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
-                </View>
-            </TouchableOpacity>
+        ride.active ? (
+            parseInt(ride.waitTime) < 15 ? (
+                <TouchableOpacity onPress={handleClick}>
+                    <View style={[style.card, style.green]}>
+                        <WaitTime waitTime={ride.waitTime}/>
+                        <Text style={style.ride}>{ride.name}</Text>
+                        <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
+                    </View>
+                </TouchableOpacity>
+            ) : parseInt(ride.waitTime) < 30 ? (
+                <TouchableOpacity onPress={handleClick}>
+                    <View style={[style.card, style.yellow]}>
+                        <WaitTime waitTime={ride.waitTime}/>
+                        <Text style={style.ride}>{ride.name}</Text>
+                        <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
+                    </View>
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity onPress={handleClick}>
+                    <View style={[style.card, style.red]}>
+                        <WaitTime waitTime={ride.waitTime}/>
+                        <Text style={style.ride}>{ride.name}</Text>
+                        <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
+                    </View>
+                </TouchableOpacity>
+            )
         ) : (
             <TouchableOpacity onPress={handleClick}>
-                <View style={[style.card, style.red]}>
-                    <WaitTime waitTime={ride.waitTime}/>
+                <View style={[style.card, style.grey]}>
+                    <WaitTime waitTime=""/>
                     <Text style={style.ride}>{ride.name}</Text>
                     <LoveButton isLoved={isLoved} setIsLoved={setIsLoved} ride={ride} setFavRides={setFavRides}/>
                 </View>
             </TouchableOpacity>
         )
+
     )
 
 };
@@ -107,6 +118,9 @@ const style = StyleSheet.create({
     },
     red: {
         backgroundColor: 'rgba(248,22,51,0.55)'
+    },
+    grey: {
+        backgroundColor: 'grey'
     }
 })
 

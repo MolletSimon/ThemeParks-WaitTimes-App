@@ -1,22 +1,16 @@
 import React, { useEffect, useState} from 'react';
 import {
     ImageBackground,
-    SafeAreaView,
-    ScrollView,
     StyleSheet,
     Image,
-    Alert,
-    Text,
     View,
     AsyncStorage
 } from 'react-native';
 
-import Footer from "./components/footer";
 import Park from "./screen/park";
 import Ride from "./screen/ride";
 import {BlurView} from "@react-native-community/blur";
 import Swiper from 'react-native-swiper'
-import {set} from "react-native-reanimated";
 
 const App = () => {
     const [page, setPage] = useState("parc");
@@ -29,7 +23,6 @@ const App = () => {
             AsyncStorage.getItem("fav").then(favs => {
                 const favorites = (JSON.parse(favs)).rides
                 setFavRides(favorites);
-
             })
         }
     }
