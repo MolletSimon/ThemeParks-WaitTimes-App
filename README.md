@@ -18,14 +18,13 @@ I added some screenshots in the readme but heres some features
 
 > This is my first react native app, I learned the tech with just some crashcourse on react and the react-native documentation
 
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
 
 ## Screenshots
-![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.11.png)
-![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.40.png)
-![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.43.png)
-![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.54.png)
-![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.07.03.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/disney_park.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/favorites.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/info_ride.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/map.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/studio.png)
 
 
 ## Tech
@@ -55,16 +54,6 @@ If you are on iOS you may need to make a pod install
 $ cd ios
 $ pod install
 ```
-### Plugins
-
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| GitHub | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
-| Medium | [plugins/medium/README.md][PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
 
 
 ### Development
