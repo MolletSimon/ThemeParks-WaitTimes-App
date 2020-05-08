@@ -6,30 +6,64 @@ const Picto = ({image, text, ride}) => {
         <View>
             <View style={styles.row}>
                 <View style={styles.item}>
-                    <View style={[styles.circle, styles.red]}>
-                        <Image source={require('../../assets/images/fastpassNOK.png')} />
-                    </View>
-                    <Text style={[styles.text, styles.textRed]}>Pas de fastpass</Text>
+                    {ride.fastPass ? (
+                        <>
+                        <View style={[styles.circle, styles.green]}>
+                            <Image source={require('../../assets/images/fastpassOK.png')} />
+                        </View>
+                        <Text style={[styles.text, styles.textGreen]}>FastPass disponible</Text>
+                        </>
+                    ): (
+                        <>
+                        <View style={[styles.circle, styles.red]}>
+                            <Image source={require('../../assets/images/fastpassNOK.png')} />
+                        </View>
+                        <Text style={[styles.text, styles.textRed]}>Pas de fastpass</Text>
+                        </>
+                    )}
                 </View>
-                <View style={styles.item}>   
-                    <View style={[styles.circle, styles.green]}>
-                        <Image source={require('../../assets/images/singleriderOK.png')} />
-                    </View>
-                    <Text style={[styles.text, styles.textGreen]}>10min</Text>
+                <View style={styles.item}> 
+                    {ride.meta.singleRider ? (
+                        <>
+                            <View style={[styles.circle, styles.green]}>
+                                <Image source={require('../../assets/images/singleriderOK.png')} />
+                            </View>
+                            <Text style={[styles.text, styles.textGreen]}>Single Rider disponible : 0min</Text>
+                        </>
+                    ) : (
+                        <>
+                            <View style={[styles.circle, styles.red]}>
+                                <Image source={require('../../assets/images/singleriderNOK.png')} />
+                            </View>
+                            <Text style={[styles.text, styles.textRed]}>Pas de single rider</Text>
+                        </>
+                    )}
                 </View> 
             </View>
             <View style={styles.row}>
                 <View style={styles.item}>
-                    <View style={[styles.circle, styles.green]}>
-                        <Image source={require('../../assets/images/photopassOK.png')} />
-                    </View>
-                    <Text style={[styles.text, styles.textGreen]}>PhotoPass disponible</Text>
+                    {ride.meta.photoPass ? (
+                        <>
+                            <View style={[styles.circle, styles.green]}>
+                                <Image source={require('../../assets/images/photopassOK.png')} />
+                            </View>
+                            <Text style={[styles.text, styles.textGreen]}>PhotoPass disponible</Text>
+                        </>
+                    ) : (
+                        <>
+                            <View style={[styles.circle, styles.red]}>
+                                <Image source={require('../../assets/images/photopassNOK.png')} />
+                            </View>
+                            <Text style={[styles.text, styles.textRed]}>Pas de PhotoPass</Text>
+                        </>
+                    )}
+                    
                 </View>
                 <View style={styles.item}>   
-                    <View style={[styles.circle, styles.yellow]}>
-                        <Image source={require('../../assets/images/chantier.png')} />
+                    <View style={[styles.circle, styles.closed]}>
+                        <Image source={require('../../assets/images/closed.png')} />
                     </View>
-                    <Text style={[styles.text, styles.textYellow]}>Travaux</Text>
+                    <Text style={[styles.text, styles.textClosed]}>Fermée</Text>
                 </View> 
             </View>
         </View>
@@ -54,10 +88,11 @@ const styles = StyleSheet.create({
     },
     text: {
         marginTop: 10,
-        fontSize: 20,
+        fontSize: 18,
         fontStyle: 'italic',
         fontWeight: 'bold',
         textAlign: 'center',
+        paddingBottom: 15
     },
     item: {
         width: '40%',
@@ -83,6 +118,13 @@ const styles = StyleSheet.create({
     }, 
     textYellow: {
         color:'#E8833A'
+    },
+    textClosed: {
+        color: '#393939'
+    },
+    closed: {
+        borderColor: '#393939',
+        backgroundColor: '#717171',
     }
 })
 export default Picto;
