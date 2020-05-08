@@ -1,9 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, TouchableOpacity, View, Text, Image, AsyncStorage, Alert, ActivityIndicator} from "react-native";
+import {
+    StyleSheet,
+    TouchableOpacity,
+    View,
+    Text,
+    Image,
+    AsyncStorage,
+    Alert,
+    ActivityIndicator,
+    Modal,
+    Dimensions
+} from "react-native";
 import WaitTime from '../../components/waitTimes';
 import Picto from '../../components/picto';
 import FadeInView from '../../components/fadeinview';
 import MapView, { Marker } from 'react-native-maps';
+import {LineChart} from "react-native-chart-kit";
 navigator.geolocation = require('@react-native-community/geolocation');
 
 const Ride = ({setPage}) => {
@@ -11,9 +23,14 @@ const Ride = ({setPage}) => {
     const [mapView, setMapView] = useState(false);
     const [latUser, setLatUser] = useState(null);
     const [lonUser, setLonUser] = useState(null);
+    const [modalChart, setModalChart] = useState(false);
 
     const handleClickBack = () => {
         setPage("parc");
+    }
+
+    const handleClickChart = () => {
+        setModalChart(true);
     }
 
     // get selected ride
@@ -22,6 +39,7 @@ const Ride = ({setPage}) => {
             AsyncStorage.getItem("selectedRide")
                 .then(ride => {
                     setRide(JSON.parse(ride));
+                    console.log(ride);
                     AsyncStorage.removeItem("selectedRide");
                 })
                 .catch(error => {
@@ -47,8 +65,8 @@ const Ride = ({setPage}) => {
     if(mapView && ride && latUser && lonUser) {
         return (
             <View style={StyleSheet.absoluteFillObject}>
-            
-            <MapView style ={StyleSheet.absoluteFillObject} 
+
+            <MapView style ={StyleSheet.absoluteFillObject}
                     mapType="satellite"
                     initialRegion={{
                         latitude: ride.meta.latitude,
@@ -57,7 +75,7 @@ const Ride = ({setPage}) => {
                         longitudeDelta: 0.0017,
                     }}>
                 <TouchableOpacity onPress={handleClickBack}>
-                    <Image style={styles.image} source={{uri: 'https://img.icons8.com/cotton/64/000000/circled-left-2.png'}}></Image>
+                    <Image style={styles.image} source={{uri: 'https://img.icons8.com/cotton/64/000000/circled-left-2.png'}}/>
                 </TouchableOpacity>
                 <Marker
                     coordinate={{
@@ -65,7 +83,7 @@ const Ride = ({setPage}) => {
                         longitude: ride.meta.longitude
                     }}
                     title={ride.name}
-                    image={require('../../assets/images/marker.png')}
+                    // image={require('../../assets/images/marker.png')}
                 />
                 <Marker
                     coordinate={{
@@ -73,7 +91,7 @@ const Ride = ({setPage}) => {
                         longitude: lonUser
                     }}
                     title="You"
-                    image={require('../../assets/images/you.png')}
+                    // image={require('../../assets/images/you.png')}
                 />
             </MapView>
             <View style={{ position: 'absolute', top: 100, left: 50 }}/>
@@ -83,15 +101,75 @@ const Ride = ({setPage}) => {
 
     return(
         <View style={styles.rideView}>
+            <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalChart}
+                >
+                <View style={styles.modal}>
+                    {/*<LineChart*/}
+                    {/*    data={{*/}
+                    {/*        labels: ["8:00", "10:00", "12:00","15:00", "18:00", "21:00"],*/}
+                    {/*        datasets: [*/}
+                    {/*            {*/}
+                    {/*                data: [*/}
+                    {/*                    5,*/}
+                    {/*                    15,*/}
+                    {/*                    25,*/}
+                    {/*                    40,*/}
+                    {/*                    35,*/}
+                    {/*                    30,*/}
+                    {/*                    25,*/}
+                    {/*                    30,*/}
+                    {/*                    35*/}
+                    {/*                ],*/}
+                    {/*            }*/}
+                    {/*        ]*/}
+                    {/*    }}*/}
+                    {/*    fromZero={true}*/}
+                    {/*    withInnerLines={false}*/}
+                    {/*    yAxisInterval="10"*/}
+                    {/*    withDots={false}*/}
+                    {/*    width={Dimensions.get("window").width * 0.9}*/}
+                    {/*    height={300}*/}
+                    {/*    chartConfig={{*/}
+                    {/*        backgroundColor: "#4d5dac",*/}
+                    {/*        backgroundGradientFrom: "#4d5dac",*/}
+                    {/*        backgroundGradientTo: "#264aff",*/}
+                    {/*        decimalPlaces: 0, // optional, defaults to 2dp*/}
+                    {/*        color: (opacity = 0) => `rgba(255, 255, 255, ${opacity})`,*/}
+                    {/*        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,*/}
+                    {/*        style: {*/}
+                    {/*            borderRadius: 16*/}
+                    {/*        },*/}
+                    {/*        propsForDots: {*/}
+                    {/*            r: "6",*/}
+                    {/*            strokeWidth: "2",*/}
+                    {/*            stroke: "white"*/}
+                    {/*        }*/}
+                    {/*    }}*/}
+                    {/*    bezier*/}
+                    {/*    style={styles.chart}*/}
+                    {/*/>*/}
+                    <Text>WIP</Text>
+                    <TouchableOpacity onPress={() => setModalChart(false)} style={styles.closeButton}>
+                        <Text style={{fontFamily: 'Regular'}}>Fermer</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
+
+
+
+
             <TouchableOpacity onPress={handleClickBack}>
-                <Image style={styles.image} source={{uri: 'https://img.icons8.com/dotty/80/000000/circled-left-2.png'}}></Image>
+                <Image style={styles.image} source={{uri: 'https://img.icons8.com/dotty/80/000000/circled-left-2.png'}} />
             </TouchableOpacity>
 
             { ride ? (
                 <FadeInView style={styles.card}>
                 <View style={styles.firstRow}>
                     <TouchableOpacity onPress={handleClickMap}>
-                        <Image style={{marginTop:40}} source={require('../../assets/images/map.png')}></Image>
+                        <Image style={{marginTop:40}} source={require('../../assets/images/map.png')} />
                     </TouchableOpacity>
                     {ride.active ? (
                         parseInt(ride.waitTime) < 20 ? (
@@ -102,11 +180,11 @@ const Ride = ({setPage}) => {
                             <WaitTime style={[styles.waitTime, styles.red]} waitTime={`${ride.waitTime}min`} ridePage={true}/>
                         )
                     ) : (
-                        <WaitTime style={[styles.waitTime, styles.closed]} waitTime={`Fermée`} ridePage={true}/>
+                        <WaitTime style={[styles.waitTime, styles.closed]} waitTime="Fermée" ridePage={true}/>
                     )}
-                    
-                    <TouchableOpacity>
-                        <Image style={{marginTop:40}} source={require('../../assets/images/graph.png')}></Image>
+
+                    <TouchableOpacity onPress={handleClickChart}>
+                        <Image style={{marginTop:40}} source={require('../../assets/images/graph.png')} />
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.rideName}>{ride.name}</Text>
@@ -115,7 +193,7 @@ const Ride = ({setPage}) => {
             ) : (
                 <ActivityIndicator size="large" color="white" />
             )}
-            
+
         </View>
     )
 }
@@ -129,6 +207,29 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    closeButton: {
+        fontFamily: 'Regular',
+        padding: 20,
+        fontSize: 20,
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor: '#A52020',
+        backgroundColor: '#E9A2AD',
+    },
+    chart: {
+        marginVertical: 8,
+        borderRadius: 16,
+        padding: 25
+    },
+    modal: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        borderColor: 'black',
+
     },
     image: {
         marginTop: 50,
