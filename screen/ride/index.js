@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, TouchableOpacity, View, Text, Image, ActivityIndicator, AsyncStorage, Alert, SafeAreaView} from "react-native";
+import {StyleSheet, TouchableOpacity, View, Text, Image, AsyncStorage, Alert} from "react-native";
 import WaitTime from '../../components/waitTimes';
-import Title from '../../components/title';
-// import * as Font from 'expo-font';
 import Picto from '../../components/picto';
-import Font from '../../components/font';
+import FadeInView from '../../components/fadeinview';
 
 const Ride = ({setPage}) => {
     const [ride, setRide] = useState(null);
@@ -42,11 +40,19 @@ const Ride = ({setPage}) => {
             ) : (
                 <ActivityIndicator size="large" color="white" />
             )} */}
-            <View style= {styles.card}>
-                <WaitTime style={styles.waitTime} waitTime="120min" ridePage={true}/>
+            <FadeInView style={styles.card}>
+                <View style={styles.firstRow}>
+                    <TouchableOpacity>
+                        <Image style={{marginTop:40}} source={require('../../assets/images/map.png')}></Image>
+                    </TouchableOpacity>
+                    <WaitTime style={styles.waitTime} waitTime="120min" ridePage={true}/>
+                    <TouchableOpacity>
+                        <Image style={{marginTop:40}} source={require('../../assets/images/graph.png')}></Image>
+                    </TouchableOpacity>
+                </View>
                 <Text style={styles.rideName}>Big Thunder Mountain</Text>
                 <Picto />
-            </View>
+            </FadeInView>
         </View>
     )
 }
@@ -54,29 +60,39 @@ const Ride = ({setPage}) => {
 const styles = StyleSheet.create({
     rideView: {
         flex: 1,
-        backgroundColor: 'rgba(255,255,255,0.4)'
+        backgroundColor: 'rgba(255,255,255,0.4)',
+    },
+    firstRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     image: {
         marginTop: 50,
         marginLeft: 20
     },
     card: {
-        flex: 0.9,
+        flex: 0.93,
         borderWidth: 2,
-        borderColor: 'lightgray',
-        borderRadius: 5,
+        borderColor: 'black',
+        borderRadius: 10,
         marginTop: 10,
         marginLeft: '10%',
         marginRight: '10%',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     rideName: {
-        marginTop: 35,
+        marginTop: 20,
+        padding: 7,
+        paddingTop: 20,
         color: 'black',
         fontSize: 35,
         textAlign: 'center',
-        fontFamily: 'Bold'
+        fontFamily: 'Bold-Condensed',
+        borderWidth: 2,
+        width: '101%'
     },
     waitTime: {
         borderWidth: 2,

@@ -36,7 +36,7 @@ const style = StyleSheet.create({
         fontSize: 30,
         marginTop: 12,
         color: 'black',
-        fontFamily: 'Bold'
+        fontFamily: 'Bold-Condensed'
     }
 })
 

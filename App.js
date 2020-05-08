@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Image,
     View,
-    AsyncStorage,
     Alert,
     ActivityIndicator
 } from 'react-native';
@@ -15,7 +14,6 @@ import {BlurView} from "@react-native-community/blur";
 import Swiper from 'react-native-swiper';
 import Axios from "axios";
 import {WaitTimesSerices} from "./services/WaitTimesService";
-import {NetworkInfo} from 'react-native-network-info';
 import { getUniqueId } from 'react-native-device-info';
 
 const App = () => {
