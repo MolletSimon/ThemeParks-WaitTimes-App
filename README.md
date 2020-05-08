@@ -21,9 +21,14 @@ I added some screenshots in the readme but heres some features
 This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
 
 ## Screenshots
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.11.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.40.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.43.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.06.54.png)
+![Screenshot](https://github.com/MolletSimon/Disney-Wait-Times/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202020-05-09%20at%2000.07.03.png)
 
 
-### Tech
+## Tech
 
 I used some tech to do this wonderful app
 
