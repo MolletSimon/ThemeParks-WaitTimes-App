@@ -41,6 +41,12 @@ target 'ThemeParks' do
   # Automatically detect installed unimodules
   use_unimodules!
 
+  # React Native Maps dependencies
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', :path => rn_maps_path
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
+
   # react-native-cli autolinking
   use_native_modules!
   pod 'react-native-blur', :path => '../node_modules/@react-native-community/blur'
@@ -48,5 +54,7 @@ target 'ThemeParks' do
   pod 'react-native-network-info', :path => '../node_modules/react-native-network-info'
 
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
 
 end

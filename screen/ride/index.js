@@ -3,9 +3,11 @@ import {StyleSheet, TouchableOpacity, View, Text, Image, AsyncStorage, Alert, Ac
 import WaitTime from '../../components/waitTimes';
 import Picto from '../../components/picto';
 import FadeInView from '../../components/fadeinview';
+import MapView, { Marker } from 'react-native-maps';
 
 const Ride = ({setPage}) => {
     const [ride, setRide] = useState(null);
+    const [mapView, setMapView] = useState(false);
 
     const handleClickBack = () => {
         setPage("parc");
@@ -29,6 +31,38 @@ const Ride = ({setPage}) => {
         getRide();
     }, []);
 
+    const handleClickMap = () => {
+        setMapView(true);
+    }
+
+    if(mapView && ride) {
+        return (
+            <View style={StyleSheet.absoluteFillObject}>
+            
+            <MapView style ={StyleSheet.absoluteFillObject} 
+                    mapType="satellite"
+                    initialRegion={{
+                        latitude: ride.meta.latitude,
+                        longitude: ride.meta.longitude,
+                        latitudeDelta: 0.0017,
+                        longitudeDelta: 0.0017,
+                    }}>
+                <TouchableOpacity onPress={handleClickBack}>
+                    <Image style={styles.image} source={require('../../assets/images/icons8-flèche-gauche-64.png')}></Image>
+                </TouchableOpacity>
+                <Marker
+                    coordinate={{
+                        latitude: ride.meta.latitude,
+                        longitude: ride.meta.longitude
+                    }}
+                    title={ride.name}
+                />
+            </MapView>
+            <View style={{ position: 'absolute', top: 100, left: 50 }}/>
+          </View>
+        )
+    }
+
     return(
         <View style={styles.rideView}>
             <TouchableOpacity onPress={handleClickBack}>
@@ -38,7 +72,7 @@ const Ride = ({setPage}) => {
             { ride ? (
                 <FadeInView style={styles.card}>
                 <View style={styles.firstRow}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleClickMap}>
                         <Image style={{marginTop:40}} source={require('../../assets/images/map.png')}></Image>
                     </TouchableOpacity>
                     {ride.active ? (
@@ -130,6 +164,9 @@ const styles = StyleSheet.create({
     closed: {
         borderColor: '#393939',
         backgroundColor: '#717171',
-    }
+    },
+    map: {
+        ...StyleSheet.absoluteFillObject,
+      },
 })
 export default Ride;
