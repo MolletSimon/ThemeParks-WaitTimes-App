@@ -1,30 +1,24 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator} from 'react-native';
+import {AsyncStorage, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, Alert} from 'react-native';
 import WaitTime from '../waitTimes';
 import * as Font from 'expo-font';
 import LoveButton from "../love";
 
 const Card = ({ride, setPage, favRides}) => {
     const [isLoved, setIsLoved] = useState(false);
-    const [isFontLoaded, setIsFontLoaded] = useState(false);
-
-    const componentDidMount = async () => {
-        await Font.loadAsync({
-            'Acme': require('../../assets/fonts/AvenirNextLTPro-Regular.otf')
-        });
-        setIsFontLoaded(true);
-    }
-
-    useEffect(() => {
-        componentDidMount();
-    }, [])
-
-    if (!isFontLoaded) {
-        return <ActivityIndicator size="large" color="white" />
-    }
 
     const handleClick = () => {
-        setPage("ride");
+        AsyncStorage.setItem("selectedRide", JSON.stringify(ride))
+            .then(() => {
+                setPage("ride");
+            })
+            .catch(error => {
+                Alert.alert(
+                    "Oups..",
+                    `Une erreur est survenue lors de l'ouverture des infos de ${ride.name}`
+                )
+            });
+        
     }
 
     return (
@@ -95,7 +89,7 @@ const style = StyleSheet.create({
         marginTop: 12,
         fontStyle: 'italic',
         color: 'white',
-        fontFamily: 'Acme'
+        fontFamily: 'Regular'
     },
     green: {
         backgroundColor: 'rgba(41,219,120,0.47)'

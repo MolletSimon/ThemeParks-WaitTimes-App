@@ -12,7 +12,6 @@ const LoveButton = ({ride, isLoved, setIsLoved}) => {
         //check if already favorite
         if (ride.isLoved) {
             ride.isLoved = false;
-            console.log(`${WaitTimesSerices.DELETE_FAVRIDE}/${ride.idFav}`)
             Axios.delete(`${WaitTimesSerices.DELETE_FAVRIDE}/${ride.idFav}`)
         } else {
             ride.isLoved = true;
@@ -26,12 +25,12 @@ const LoveButton = ({ride, isLoved, setIsLoved}) => {
         <TouchableOpacity onPress={handleClick}>
             {ride.isLoved ? (
                 <Image
-                    source={{uri: 'https://img.icons8.com/ios-filled/100/000000/love-circled.png'}}
+                    source={require('../../assets/images/icon-loved.png')}
                     style={styles.icon}
                 />
             ) : (
                 <Image
-                    source={{uri: 'https://img.icons8.com/ios/100/000000/love-circled.png'}}
+                    source={require('../../assets/images/icon-unloved.png')}
                     style={styles.icon}
                 />
             )}

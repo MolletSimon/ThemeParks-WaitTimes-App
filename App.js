@@ -5,9 +5,10 @@ import {
     Image,
     View,
     AsyncStorage,
-    Alert
+    Alert,
+    ActivityIndicator
 } from 'react-native';
-
+import * as Font from "expo-font";
 import Park from "./screen/park";
 import Ride from "./screen/ride";
 import {BlurView} from "@react-native-community/blur";
@@ -23,6 +24,21 @@ const App = () => {
     const [ridesStudios, setRidesStudios] = useState(null);
     const [favRides, setFavRides] = useState(null);
 
+    const [isFontLoaded, setIsFontLoaded] = useState(false);
+
+    const componentDidMount = async () => {
+        await Font.loadAsync({
+            'Regular': require('./assets/fonts/AvenirNextLTPro-Regular.otf'),
+            'Bold': require('./assets/fonts/AvenirNextLTPro-Bold.otf'),
+            'Bold-Condensed': require('./assets/fonts/AvenirNextLTPro-BoldCn.otf')
+        });
+        setIsFontLoaded(true);
+    }
+
+    useEffect(() => {
+        componentDidMount();
+    }, [])
+    
     useEffect(() => {
         const fetchData = async () => {
             //get fav rides
@@ -49,6 +65,7 @@ const App = () => {
                             // check if ride in favride
                             favRides.forEach(favRide => {
                                 if (favRide.id === newRide.id) {
+                                    newRide.idFav = favRide.idFav;
                                     newRide.isLoved = true;
                                 }
                             })
@@ -62,6 +79,12 @@ const App = () => {
                             error.message
                         )
                     })
+            })
+            .catch(err => {
+                Alert.alert(
+                    "Oups..",
+                    err.message
+                )
             })
         };
         fetchData();
@@ -78,6 +101,7 @@ const App = () => {
                             // check if ride in favride
                             favRides.forEach(favRide => {
                                 if (favRide.id === newRide.id) {
+                                    newRide.idFav = favRide.idFav;
                                     newRide.isLoved = true;
                                 }
                             })
@@ -102,7 +126,17 @@ const App = () => {
                 });
                 setFavRides(favRides);
             })
+            .catch(err => {
+                Alert.alert(
+                    "ERREUR",
+                    err.message
+                )
+            })
         }
+    }
+
+    if (!isFontLoaded) {
+        return <ActivityIndicator size="large" color="white" />
     }
 
     return (
@@ -119,7 +153,7 @@ const App = () => {
                 <Swiper style={styles.wrapper}
                         loop={false}
                         activeDot={
-                            <Image source={{uri: 'https://img.icons8.com/nolan/64/disney-movies-.png'}} style={styles.activeDot}/>
+                            <Image source={require('./assets/images/icon-active-dot.png')} style={styles.activeDot}/>
                         }
                         paginationStyle={styles.pagination}
                         bounces={true}

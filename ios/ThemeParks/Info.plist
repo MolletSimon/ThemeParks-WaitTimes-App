@@ -66,6 +66,8 @@
 		<string>Neucha.ttf</string>
 		<string>Cabin-Medium.ttf</string>
 		<string>AvenirNextLTPro-Regular.otf</string>
+		<string>AvenirNextLTPro-Bold.otf</string>
+		<string>AvenirNextLTPro-BoldCn.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

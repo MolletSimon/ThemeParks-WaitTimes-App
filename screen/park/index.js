@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, AsyncStorage, SafeAreaView, StyleSheet, View, Alert} from 'react-native';
 import ViewPark from "../../components/viewPark";
 
-
 const Park = ({page, setPage, rides}) => {
     
     return (
