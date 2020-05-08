@@ -28,15 +28,18 @@ const App = () => {
         await Font.loadAsync({
             'Regular': require('./assets/fonts/AvenirNextLTPro-Regular.otf'),
             'Bold': require('./assets/fonts/AvenirNextLTPro-Bold.otf'),
-            'Bold-Condensed': require('./assets/fonts/AvenirNextLTPro-BoldCn.otf')
+            'Bold-Condensed': require('./assets/fonts/AvenirNextLTPro-BoldCn.otf'),
+            'Italic': require('./assets/fonts/AvenirNextLTPro-It.otf')
         });
         setIsFontLoaded(true);
     }
 
+    // use effect for the font
     useEffect(() => {
         componentDidMount();
     }, [])
     
+    // use effect for the datas
     useEffect(() => {
         const fetchData = async () => {
             //get fav rides

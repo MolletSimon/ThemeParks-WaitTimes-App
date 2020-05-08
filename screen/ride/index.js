@@ -4,10 +4,13 @@ import WaitTime from '../../components/waitTimes';
 import Picto from '../../components/picto';
 import FadeInView from '../../components/fadeinview';
 import MapView, { Marker } from 'react-native-maps';
+navigator.geolocation = require('@react-native-community/geolocation');
 
 const Ride = ({setPage}) => {
     const [ride, setRide] = useState(null);
     const [mapView, setMapView] = useState(false);
+    const [latUser, setLatUser] = useState(null);
+    const [lonUser, setLonUser] = useState(null);
 
     const handleClickBack = () => {
         setPage("parc");
@@ -32,10 +35,16 @@ const Ride = ({setPage}) => {
     }, []);
 
     const handleClickMap = () => {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                setLatUser(position.coords.latitude);
+                setLonUser(position.coords.longitude);
+            }
+        )
         setMapView(true);
     }
 
-    if(mapView && ride) {
+    if(mapView && ride && latUser && lonUser) {
         return (
             <View style={StyleSheet.absoluteFillObject}>
             
@@ -48,7 +57,7 @@ const Ride = ({setPage}) => {
                         longitudeDelta: 0.0017,
                     }}>
                 <TouchableOpacity onPress={handleClickBack}>
-                    <Image style={styles.image} source={require('../../assets/images/icons8-flèche-gauche-64.png')}></Image>
+                    <Image style={styles.image} source={{uri: 'https://img.icons8.com/cotton/64/000000/circled-left-2.png'}}></Image>
                 </TouchableOpacity>
                 <Marker
                     coordinate={{
@@ -56,6 +65,15 @@ const Ride = ({setPage}) => {
                         longitude: ride.meta.longitude
                     }}
                     title={ride.name}
+                    image={require('../../assets/images/marker.png')}
+                />
+                <Marker
+                    coordinate={{
+                        latitude: latUser,
+                        longitude: lonUser
+                    }}
+                    title="You"
+                    image={require('../../assets/images/you.png')}
                 />
             </MapView>
             <View style={{ position: 'absolute', top: 100, left: 50 }}/>
@@ -66,7 +84,7 @@ const Ride = ({setPage}) => {
     return(
         <View style={styles.rideView}>
             <TouchableOpacity onPress={handleClickBack}>
-                <Image style={styles.image} source={require('../../assets/images/icons8-flèche-gauche-64.png')}></Image>
+                <Image style={styles.image} source={{uri: 'https://img.icons8.com/dotty/80/000000/circled-left-2.png'}}></Image>
             </TouchableOpacity>
 
             { ride ? (
@@ -114,7 +132,9 @@ const styles = StyleSheet.create({
     },
     image: {
         marginTop: 50,
-        marginLeft: 20
+        marginLeft: 20,
+        height: 60,
+        width: 60
     },
     card: {
         flex: 0.93,

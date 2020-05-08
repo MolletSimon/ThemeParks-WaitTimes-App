@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Text } from 'react-native';
 
 const Picto = ({image, text, ride}) => {
     return(
-        <View>
+        <View style={styles.container}>
             <View style={styles.row}>
                 <View style={styles.item}>
                     {ride.fastPass ? (
@@ -71,6 +71,11 @@ const Picto = ({image, text, ride}) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        display: 'flex',
+        justifyContent: 'center',
+        flex: 1
+    },
     row: {
         display: 'flex',
         flexDirection: 'row',
@@ -88,9 +93,8 @@ const styles = StyleSheet.create({
     },
     text: {
         marginTop: 10,
-        fontSize: 18,
-        fontStyle: 'italic',
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontFamily: 'Italic',
         textAlign: 'center',
         paddingBottom: 15
     },

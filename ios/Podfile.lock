@@ -241,6 +241,8 @@ PODS:
   - React-jsinspector (0.61.5)
   - react-native-blur (0.8.0):
     - React
+  - react-native-geolocation (2.0.2):
+    - React
   - react-native-google-maps (0.27.1):
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 3.5.0)
@@ -344,6 +346,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-network-info (from `../node_modules/react-native-network-info`)
@@ -440,6 +443,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-blur:
     :path: "../node_modules/@react-native-community/blur"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
@@ -535,6 +540,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
+  react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-network-info: d1290ffc0bd0709e11436f5b8d7f605dcc5c4530
@@ -567,6 +573,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: cb890c79c63885504ddc0efd7a7d01481760aca2
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: bfda8b2286e489c663f46264dc18b4827fc39cb0
+PODFILE CHECKSUM: 78be0db422daf52bd698e285a706ffdc93773ce8
 
 COCOAPODS: 1.9.1
