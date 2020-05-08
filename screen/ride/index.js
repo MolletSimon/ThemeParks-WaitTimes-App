@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     },
     closed: {
         borderColor: '#393939',
-        backgroundColor: '#717171',
+        backgroundColor: '#C4C4C4',
     },
     map: {
         ...StyleSheet.absoluteFillObject,
