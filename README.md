@@ -1,7 +1,6 @@
 # Disney-Wait-Times
 Hybrid application that display the wait times for Walt Disney Studios et Disneyland Park Paris. Made with React Native and ❤️
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ## Data
 I made an API (just here: https://github.com/MolletSimon/api-themeparks) that call the cubehouse/themeparks api (https://github.com/cubehouse/themeparks).
